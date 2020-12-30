@@ -63,16 +63,31 @@
       </div>
       <div class="row">
         <div class="col d-grid col-6 mx-auto">
-          <div class="btn-group-vertical" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio1">1) Answer goes here</label>
-          
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio2">2) Answer goes here</label>
-          
-            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-            <label class="btn btn-outline-primary" for="btnradio3">3) Answer goes here</label>
+          <div class="btn-group-vertical" role="group" aria-label="Multiple-choice answers">
+            <button type="button" class="btn btn-outline-secondary">1) Answer goes here</button>
+            <button type="button" class="btn btn-outline-secondary">2) Answer goes here</button>
+            <button type="button" class="btn btn-outline-secondary">3) Answer goes here</button>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h5 class="text-center"><span class="badge rounded-pill bg-success">Correct!</span></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h5 class="text-center"><span class="badge rounded-pill bg-danger">Incorrect</span></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h1 class="text-center">Game Over!</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4 class="text-center" id="score"></h4>
         </div>
       </div>
     </div>
