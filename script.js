@@ -3,9 +3,10 @@ var countdown = 100;
 var score = 0;
 
 // store questions as objects
-var question01 = {question: "Question01 goes here", choices: ["abcdefg", "hijk", "lmnop"], answer: 2};
-var question02 = {question: "Question02 goes here", choices: ["qrs", "tuv", "wx", "yz"], answer: 3};
-var question03 = {question: "Question03 goes here", choices: ["true", "false"], answer: 0};
+var question01 = {question: "Question01 goes here", choicesArray: ["abcdefg", "hijk", "lmnop"], answer: 2};
+var question02 = {question: "Question02 goes here", choicesArray: ["qrs", "tuv", "wx", "yz"], answer: 3};
+var question03 = {question: "Question03 goes here", choicesArray: ["true", "false"], answer: 0};
+var questionsArray = [question01, question02, question03];
 
 // get reference to each element
 var timerElement = document.querySelector("#timer");
@@ -59,7 +60,7 @@ function showGameOverScreen() {
 }
 
 // display start screen elements
-showStartScreen();
+// showStartScreen();
 
 timerElement.children[0].children[0].textContent = "Time: " + countdown;
 
@@ -68,6 +69,18 @@ timerElement.children[0].children[0].textContent = "Time: " + countdown;
 // start countdown timer
 
 // display next question
+showQuizScreen();
+function displayNextQuestion(index) {
+  questionElement.children[0].children[0].textContent = questionsArray[index].question;
+  for (var i = 0; i < questionsArray[index].choicesArray.length; i++) {
+    var choice = document.createElement("button");
+    choice.setAttribute("type", "button");
+    choice.setAttribute("class", "btn btn-outline-secondary text-start");
+    choice.textContent = (i + 1) + ") " + questionsArray[index].choicesArray[i];
+    choicesElement.children[0].children[0].appendChild(choice);
+  }
+}
+displayNextQuestion(0);
 
 // listen for answer
 
@@ -78,6 +91,7 @@ timerElement.children[0].children[0].textContent = "Time: " + countdown;
 // after last question or timer expires, calculate score
 
 // display game over elements
+// showGameOverScreen();
 scoreElement.children[0].children[0].textContent = "Your score is: " + score;
 
 // listen for submit button
