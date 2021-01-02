@@ -36,32 +36,32 @@
     </header>
 
     <div class="container">
-      <div class="row">
+      <div class="row" id="timer">
         <div class="col">
-          <h1 class="text-end" id="timer"></h1>
+          <h1 class="text-end"></h1>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="title">
         <div class="col">
           <h1 class="text-center">Coding Quiz Challenge</h1>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="rules">
         <div class="col">
           <p class="text-center">Answer the questions as quickly as possible within the time limit. Each incorrect answer subtracts 10 seconds from your remaining time.</p>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="start">
         <div class="col text-center">
           <button type="button" class="btn btn-primary">Start</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="question">
         <div class="col">
           <h5 class="text-center">Question goes here</h5>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="choices">
         <div class="col d-grid col-6 mx-auto">
           <div class="btn-group-vertical" role="group" aria-label="Multiple-choice answers">
             <button type="button" class="btn btn-outline-secondary">1) Answer goes here</button>
@@ -70,27 +70,22 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="badge">
         <div class="col">
           <h5 class="text-center"><span class="badge rounded-pill bg-success">Correct!</span></h5>
         </div>
       </div>
       <div class="row">
-        <div class="col">
-          <h5 class="text-center"><span class="badge rounded-pill bg-danger">Incorrect</span></h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
+        <div class="col" id="game-over">
           <h1 class="text-center">Game Over!</h1>
         </div>
       </div>
-      <div class="row">
+      <div class="row" id="score">
         <div class="col">
-          <h4 class="text-center" id="score"></h4>
+          <h4 class="text-center"></h4>
         </div>
       </div>
-      <form>
+      <form id="form">
         <div class="row justify-content-center">
           <div class="col-auto">
             <label for="initials" class="col-form-label">Enter your initials:</label>            
