@@ -83,9 +83,3 @@ scoreElement.children[0].children[0].textContent = "Your score is: " + score;
 // listen for submit button
 
 // go to highscores page
-
-// display initials and scores
-
-// listen for clear highscores button
-
-// listen for go back button
