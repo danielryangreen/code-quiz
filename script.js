@@ -1,5 +1,5 @@
 // global variables
-var secondsRemaining = 10;
+var secondsRemaining = 100;
 var questionsIndex = 0;
 var score = 0;
 
@@ -86,16 +86,28 @@ function setTime() {
 // display next question
 function displayNextQuestion(index) {
   questionElement.children[0].children[0].textContent = questionsArray[index].question;
+  var choicesList = choicesElement.children[0].children[0];
   for (var i = 0; i < questionsArray[index].choicesArray.length; i++) {
     var choice = document.createElement("button");
     choice.setAttribute("type", "button");
     choice.setAttribute("class", "btn btn-outline-secondary text-start");
     choice.textContent = (i + 1) + ") " + questionsArray[index].choicesArray[i];
-    choicesElement.children[0].children[0].appendChild(choice);
+    choicesList.appendChild(choice);
   }
 }
 
 // listen for answer
+choicesElement.addEventListener("click", function(eventObject) {
+  var answer = eventObject.target;
+  var index = answer.textContent.charAt(0) - 1;
+  if (index === questionsArray[questionsIndex].answer) {
+    console.log("Correct!");
+  }
+  else {
+    console.log("Incorrect");
+    secondsRemaining = secondsRemaining - 10;
+  }
+});
 
 // check answer and display correct or incorrect
 
