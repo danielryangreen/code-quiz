@@ -87,6 +87,7 @@ function setTime() {
 function displayNextQuestion(index) {
   questionElement.children[0].children[0].textContent = questionsArray[index].question;
   var choicesList = choicesElement.children[0].children[0];
+  choicesList.innerHTML = "";
   for (var i = 0; i < questionsArray[index].choicesArray.length; i++) {
     var choice = document.createElement("button");
     choice.setAttribute("type", "button");
@@ -107,6 +108,8 @@ choicesElement.addEventListener("click", function(eventObject) {
     console.log("Incorrect");
     secondsRemaining = secondsRemaining - 10;
   }
+  questionsIndex = questionsIndex + 1;
+  displayNextQuestion(questionsIndex);
 });
 
 // check answer and display correct or incorrect
