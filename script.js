@@ -1,5 +1,6 @@
 // global variables
 var secondsRemaining = 10;
+var questionsIndex = 0;
 var score = 0;
 
 // store questions as objects
@@ -60,11 +61,15 @@ function showGameOverScreen() {
 }
 
 // display start screen elements
-// showStartScreen();
-
 timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
+showStartScreen();
 
 // listen for start button
+startElement.addEventListener("click", function() {
+  showQuizScreen();
+  setTime();
+  displayNextQuestion(questionsIndex);
+});
 
 // start countdown timer
 function setTime() {
@@ -77,10 +82,8 @@ function setTime() {
     }
   }, 1000);
 }
-setTime();
 
 // display next question
-showQuizScreen();
 function displayNextQuestion(index) {
   questionElement.children[0].children[0].textContent = questionsArray[index].question;
   for (var i = 0; i < questionsArray[index].choicesArray.length; i++) {
@@ -91,7 +94,6 @@ function displayNextQuestion(index) {
     choicesElement.children[0].children[0].appendChild(choice);
   }
 }
-displayNextQuestion(0);
 
 // listen for answer
 
