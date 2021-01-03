@@ -9,7 +9,7 @@ var question02 = {question: "Question02 goes here", choicesArray: ["qrs", "tuv",
 var question03 = {question: "Question03 goes here", choicesArray: ["true", "false"], answer: 0};
 var questionsArray = [question01, question02, question03];
 
-// get reference to each element
+// get reference to each row on page
 var timerElement = document.querySelector("#timer");
 var titleElement = document.querySelector("#title");
 var rulesElement = document.querySelector("#rules");
@@ -21,6 +21,7 @@ var game_overElement = document.querySelector("#game-over");
 var scoreElement = document.querySelector("#score");
 var formElement = document.querySelector("#form");
 
+// functions to toggle rows on page
 function showStartScreen() {
   timerElement.classList.remove("d-none");
   titleElement.classList.remove("d-none");
@@ -34,7 +35,7 @@ function showStartScreen() {
   formElement.classList.add("d-none");
 }
 
-function showQuizScreen() {
+function showQuestionScreen() {
   timerElement.classList.remove("d-none");
   titleElement.classList.add("d-none");
   rulesElement.classList.add("d-none");
@@ -66,7 +67,7 @@ showStartScreen();
 
 // listen for start button
 startElement.addEventListener("click", function() {
-  showQuizScreen();
+  showQuestionScreen();
   setTime();
   displayNextQuestion(questionsIndex);
 });
@@ -86,35 +87,51 @@ function setTime() {
 // display next question
 function displayNextQuestion(index) {
   questionElement.children[0].children[0].textContent = questionsArray[index].question;
-  var choicesList = choicesElement.children[0].children[0];
-  choicesList.innerHTML = "";
+  var choicesParent = choicesElement.children[0].children[0];
+  choicesParent.innerHTML = "";
   for (var i = 0; i < questionsArray[index].choicesArray.length; i++) {
     var choice = document.createElement("button");
     choice.setAttribute("type", "button");
     choice.setAttribute("class", "btn btn-outline-secondary text-start");
     choice.textContent = (i + 1) + ") " + questionsArray[index].choicesArray[i];
-    choicesList.appendChild(choice);
+    choicesParent.appendChild(choice);
   }
 }
 
 // listen for answer
+// if incorrect, subtract 10 seconds from timer
 choicesElement.addEventListener("click", function(eventObject) {
   var answer = eventObject.target;
-  var index = answer.textContent.charAt(0) - 1;
-  if (index === questionsArray[questionsIndex].answer) {
-    console.log("Correct!");
-  }
+  var number = answer.textContent.charAt(0) - 1;
+  var badgeSpan = badgeElement.children[0].children[0];
+  if (number === questionsArray[questionsIndex].answer) {
+    displayBadge("green");
+  }  
   else {
-    console.log("Incorrect");
+    displayBadge("red");
     secondsRemaining = secondsRemaining - 10;
-  }
-  questionsIndex = questionsIndex + 1;
-  displayNextQuestion(questionsIndex);
-});
+  }  
+  setTimeout(function() {
+    badgeSpan.innerHTML = "";
+    questionsIndex = questionsIndex + 1;
+    displayNextQuestion(questionsIndex);
+  }, 1000);  
+});  
 
-// check answer and display correct or incorrect
-
-// if incorrect, subtract from timer
+// display badge for correct or incorrect
+function displayBadge(state) {
+  var badgeParent = badgeElement.children[0].children[0];
+  var badge = document.createElement("span");
+  if (state === "green") {
+    badge.setAttribute("class", "badge rounded-pill bg-success");
+    badge.textContent = "Correct!";
+  }  
+  else if (state === "red") {
+    badge.setAttribute("class", "badge rounded-pill bg-danger");
+    badge.textContent = "Wrong!";
+  }  
+  badgeParent.appendChild(badge);
+}  
 
 // after last question or timer expires, calculate score
 
