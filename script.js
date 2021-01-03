@@ -1,5 +1,5 @@
 // global variables
-var countdown = 100;
+var secondsRemaining = 10;
 var score = 0;
 
 // store questions as objects
@@ -62,11 +62,22 @@ function showGameOverScreen() {
 // display start screen elements
 // showStartScreen();
 
-timerElement.children[0].children[0].textContent = "Time: " + countdown;
+timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
 
 // listen for start button
 
 // start countdown timer
+function setTime() {
+  var timerInterval = setInterval(function() {
+    secondsRemaining--;
+    timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
+    if(secondsRemaining === 0) {
+      clearInterval(timerInterval);
+      alert("Time's up!");
+    }
+  }, 1000);
+}
+setTime();
 
 // display next question
 showQuizScreen();
