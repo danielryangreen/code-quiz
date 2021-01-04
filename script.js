@@ -152,4 +152,5 @@ formElement.addEventListener("click", function(eventObject) {
     var initials = document.querySelector("#initials").value;
     localStorage.setItem("initials", initials);
   }
+  localStorage.setItem("score", secondsRemaining);
 });
