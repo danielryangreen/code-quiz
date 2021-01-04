@@ -1,7 +1,6 @@
 // global variables
 var secondsRemaining = 100;
 var questionsIndex = 0;
-var score = 0;
 
 // store questions as objects
 var question01 = {question: "Question01 goes here", choicesArray: ["abcdefg", "hijk", "lmnop"], answer: 2};
@@ -73,13 +72,14 @@ startElement.addEventListener("click", function() {
 });
 
 // start countdown timer
+// after last question or timer expires, display score
 function setTime() {
   var timerInterval = setInterval(function() {
     secondsRemaining--;
     timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
-    if(secondsRemaining === 0) {
+    if(secondsRemaining === 0 || questionsIndex === questionsArray.length) {
       clearInterval(timerInterval);
-      alert("Time's up!");
+      displayGameOver();
     }
   }, 1000);
 }
@@ -114,9 +114,11 @@ choicesElement.addEventListener("click", function(eventObject) {
   setTimeout(function() {
     badgeSpan.innerHTML = "";
     questionsIndex = questionsIndex + 1;
-    displayNextQuestion(questionsIndex);
+    if (questionsIndex !== questionsArray.length) {
+      displayNextQuestion(questionsIndex);
+    }
   }, 1000);  
-});  
+});
 
 // display badge for correct or incorrect
 function displayBadge(state) {
@@ -133,11 +135,11 @@ function displayBadge(state) {
   badgeParent.appendChild(badge);
 }  
 
-// after last question or timer expires, calculate score
-
 // display game over elements
-// showGameOverScreen();
-scoreElement.children[0].children[0].textContent = "Your score is: " + score;
+function displayGameOver() {
+  scoreElement.children[0].children[0].textContent = "Your score is: " + secondsRemaining;
+  showGameOverScreen();
+}
 
 // listen for submit button
 
