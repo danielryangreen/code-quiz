@@ -65,10 +65,12 @@ timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
 showStartScreen();
 
 // listen for start button
-startElement.addEventListener("click", function() {
-  showQuestionScreen();
-  setTime();
-  displayNextQuestion(questionsIndex);
+startElement.addEventListener("click", function(eventObject) {
+  if (eventObject.target.matches("button")) {
+    showQuestionScreen();
+    setTime();
+    displayNextQuestion(questionsIndex);
+  }
 });
 
 // start countdown timer
@@ -101,23 +103,25 @@ function displayNextQuestion(index) {
 // listen for answer
 // if incorrect, subtract 10 seconds from timer
 choicesElement.addEventListener("click", function(eventObject) {
-  var answer = eventObject.target;
-  var number = answer.textContent.charAt(0) - 1;
-  var badgeSpan = badgeElement.children[0].children[0];
-  if (number === questionsArray[questionsIndex].answer) {
-    displayBadge("green");
-  }  
-  else {
-    displayBadge("red");
-    secondsRemaining = secondsRemaining - 10;
-  }  
-  setTimeout(function() {
-    badgeSpan.innerHTML = "";
-    questionsIndex = questionsIndex + 1;
-    if (questionsIndex !== questionsArray.length) {
-      displayNextQuestion(questionsIndex);
-    }
-  }, 1000);  
+  if(eventObject.target.matches("button")) {
+    var answer = eventObject.target;
+    var number = answer.textContent.charAt(0) - 1;
+    var badgeParent = badgeElement.children[0].children[0];
+    if (number === questionsArray[questionsIndex].answer) {
+      displayBadge("green");
+    }  
+    else {
+      displayBadge("red");
+      secondsRemaining = secondsRemaining - 10;
+    }  
+    setTimeout(function() {
+      badgeParent.innerHTML = "";
+      questionsIndex = questionsIndex + 1;
+      if (questionsIndex !== questionsArray.length) {
+        displayNextQuestion(questionsIndex);
+      }
+    }, 1000);  
+  }
 });
 
 // display badge for correct or incorrect
