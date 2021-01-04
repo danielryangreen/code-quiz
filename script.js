@@ -100,7 +100,7 @@ function displayNextQuestion(index) {
   }
 }
 
-// listen for answer
+// listen for answer button
 // if incorrect, subtract 10 seconds from timer
 choicesElement.addEventListener("click", function(eventObject) {
   if(eventObject.target.matches("button")) {
@@ -146,5 +146,10 @@ function displayGameOver() {
 }
 
 // listen for submit button
-
 // go to highscores page
+formElement.addEventListener("click", function(eventObject) {
+  if (eventObject.target.matches("button")) {
+    var initials = document.querySelector("#initials").value;
+    localStorage.setItem("initials", initials);
+  }
+});
