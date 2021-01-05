@@ -149,7 +149,7 @@ function displayGameOver() {
 // go to highscores page
 formElement.addEventListener("click", function(eventObject) {
   if (eventObject.target.matches("button")) {
-    var initials = document.querySelector("#initials").value;
+    var initials = document.querySelector("#initials").value.trim();
     localStorage.setItem("initials", initials);
   }
   localStorage.setItem("score", secondsRemaining);
