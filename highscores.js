@@ -47,17 +47,17 @@ function displayHighScores() {
     highscore.setAttribute("class", "list-group-item");
     highscore.textContent = scoresArray[i];
     listParent.appendChild(highscore);
-  }    
-}    
+  }
+}
 
 function saveHighScores() {
   localStorage.setItem("scoresArray", JSON.stringify(scoresArray));
-}    
+}
 
 // listen for back button (I used the form action to return to home page)
 
 // listen for clear button
-clearElement.addEventListener("click", function() {
+clearElement.addEventListener("click", function () {
   scoresArray = [];
   saveHighScores();
   displayHighScores();

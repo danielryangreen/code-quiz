@@ -1,11 +1,12 @@
 // global variables
 var secondsRemaining = 100;
 var questionsIndex = 0;
+var clickCounter = 0;
 
 // store questions as objects
-var question01 = {question: "Question01 goes here", choicesArray: ["abcdefg", "hijk", "lmnop"], answer: 2};
-var question02 = {question: "Question02 goes here", choicesArray: ["qrs", "tuv", "wx", "yz"], answer: 3};
-var question03 = {question: "Question03 goes here", choicesArray: ["true", "false"], answer: 0};
+var question01 = { question: "Question01 goes here", choicesArray: ["abcdefg", "hijk", "lmnop"], answer: 2 };
+var question02 = { question: "Question02 goes here", choicesArray: ["qrs", "tuv", "wx", "yz"], answer: 3 };
+var question03 = { question: "Question03 goes here", choicesArray: ["true", "false"], answer: 0 };
 var questionsArray = [question01, question02, question03];
 
 // get reference to each row on page
@@ -65,7 +66,7 @@ timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
 showStartScreen();
 
 // listen for start button
-startElement.addEventListener("click", function(eventObject) {
+startElement.addEventListener("click", function (eventObject) {
   if (eventObject.target.matches("button")) {
     showQuestionScreen();
     setTime();
@@ -76,10 +77,10 @@ startElement.addEventListener("click", function(eventObject) {
 // start countdown timer
 // after last question or timer expires, display score
 function setTime() {
-  var timerInterval = setInterval(function() {
+  var timerInterval = setInterval(function () {
     secondsRemaining--;
     timerElement.children[0].children[0].textContent = "Time: " + secondsRemaining;
-    if(secondsRemaining === 0 || questionsIndex === questionsArray.length) {
+    if (secondsRemaining === 0 || questionsIndex === questionsArray.length) {
       clearInterval(timerInterval);
       displayGameOver();
     }
@@ -101,26 +102,32 @@ function displayNextQuestion(index) {
 }
 
 // listen for answer button
+// use clickCounter to ignore additional clicks
 // if incorrect, subtract 10 seconds from timer
-choicesElement.addEventListener("click", function(eventObject) {
-  if(eventObject.target.matches("button")) {
-    var answer = eventObject.target;
-    var number = answer.textContent.charAt(0) - 1;
-    var badgeParent = badgeElement.children[0].children[0];
-    if (number === questionsArray[questionsIndex].answer) {
-      displayBadge("green");
-    }  
-    else {
-      displayBadge("red");
-      secondsRemaining = secondsRemaining - 10;
-    }  
-    setTimeout(function() {
-      badgeParent.innerHTML = "";
-      questionsIndex = questionsIndex + 1;
-      if (questionsIndex !== questionsArray.length) {
-        displayNextQuestion(questionsIndex);
+choicesElement.addEventListener("click", function (eventObject) {
+  if (eventObject.target.matches("button")) {
+    clickCounter++;
+    console.log(clickCounter);
+    if (clickCounter === 1) {
+      var answer = eventObject.target;
+      var number = answer.textContent.charAt(0) - 1;
+      var badgeParent = badgeElement.children[0].children[0];
+      if (number === questionsArray[questionsIndex].answer) {
+        displayBadge("green");
       }
-    }, 1000);  
+      else {
+        displayBadge("red");
+        secondsRemaining = secondsRemaining - 10;
+      }
+      setTimeout(function () {
+        badgeParent.innerHTML = "";
+        questionsIndex = questionsIndex + 1;
+        if (questionsIndex !== questionsArray.length) {
+          displayNextQuestion(questionsIndex);
+        }
+        clickCounter = 0;
+      }, 1000);
+    }
   }
 });
 
@@ -131,13 +138,13 @@ function displayBadge(state) {
   if (state === "green") {
     badge.setAttribute("class", "badge rounded-pill bg-success");
     badge.textContent = "Correct!";
-  }  
+  }
   else if (state === "red") {
     badge.setAttribute("class", "badge rounded-pill bg-danger");
     badge.textContent = "Wrong!";
-  }  
+  }
   badgeParent.appendChild(badge);
-}  
+}
 
 // display game over elements
 function displayGameOver() {
@@ -147,7 +154,7 @@ function displayGameOver() {
 
 // listen for submit button
 // go to highscores page
-formElement.addEventListener("click", function(eventObject) {
+formElement.addEventListener("click", function (eventObject) {
   if (eventObject.target.matches("button")) {
     var initials = document.querySelector("#initials").value.trim();
     localStorage.setItem("initials", initials);
