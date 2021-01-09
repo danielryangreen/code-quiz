@@ -4,10 +4,18 @@ var questionsIndex = 0;
 var clickCounter = 0;
 
 // store questions as objects
-var question01 = { question: "Question01 goes here", choicesArray: ["abcdefg", "hijk", "lmnop"], answer: 2 };
-var question02 = { question: "Question02 goes here", choicesArray: ["qrs", "tuv", "wx", "yz"], answer: 3 };
-var question03 = { question: "Question03 goes here", choicesArray: ["true", "false"], answer: 0 };
-var questionsArray = [question01, question02, question03];
+var question01 = { question: "Which word best describes the purpose of JavaScript?", choicesArray: ["Structure", "Presentation", "Behavior"], answer: 2 };
+var question02 = { question: "Which tag is used to add JavaScript to the page?", choicesArray: ["<link>", "<script>", "<style>", "<dom>"], answer: 1 };
+var question03 = { question: "JavaScript is case sensitive.", choicesArray: ["True", "False"], answer: 0 };
+var question04 = { question: "Which syntax is used to indicate a single line comment in JavaScript?", choicesArray: ["<!--  -->", "/*  */", "// "], answer: 2 };
+var question05 = { question: "Which method could be used to get the user's name?", choicesArray: ["alert()", "confirm()", "prompt()", "console.log()"], answer: 2 };
+var question06 = { question: "What is the purpose of an if/else statement?", choicesArray: ["Sequence", "Selection", "Iteration"], answer: 1 };
+var question07 = { question: "Which brackets are used to define an array?", choicesArray: ["[ ]", "( )", "{ }"], answer: 0 };
+var question08 = { question: "The index of the first item in an array is 1.", choicesArray: ["True", "False"], answer: 1 };
+var question09 = { question: "What is the purpose of a for loop?", choicesArray: ["Sequence", "Selection", "Iteration"], answer: 2 };
+var question10 = { question: "Coding is so fun!", choicesArray: ["True", "False"], answer: 0 };
+// var question00 = { question: "Question00 goes here", choicesArray: ["abcdefg", "hijk", "lmnop"], answer: 2 };
+var questionsArray = [question01, question02, question03, question04, question05, question06, question07, question08, question09, question10];
 
 // get reference to each row on page
 var timerElement = document.querySelector("#timer");
